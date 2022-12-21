@@ -13,6 +13,20 @@ import java.security.Principal;
 public class UserController {
     @PreAuthorize("hasAuthority('ROLE_USER')")
     @RequestMapping("/")
+    public String index(Model model, Principal principal) {
+        UserDetails currentUser = (UserDetails) ((Authentication) principal).getPrincipal();
+        model.addAttribute("username", currentUser.getUsername());
+        return "index";
+    }
+
+    @PreAuthorize("hasAuthority('ROLE_USER')")
+    @RequestMapping("/about")
+    public String about() {
+        return "about";
+    }
+
+    @PreAuthorize("hasAuthority('ROLE_USER')")
+    @RequestMapping("/user")
     public String user(Model model, Principal principal) {
         UserDetails currentUser = (UserDetails) ((Authentication) principal).getPrincipal();
         model.addAttribute("username", currentUser.getUsername());

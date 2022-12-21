@@ -39,7 +39,7 @@ public class X509ClientCertificateAuthenticationApplication {
 		return new UserDetailsService() {
 			@Override
 			public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-				if (username.contains(" Bob ") || username.contains(" Alice ")) {
+				if (username.contains("Bob") || username.contains("Alice")) {
 					return new User(
 							username, "",
 							AuthorityUtils.commaSeparatedStringToAuthorityList("ROLE_USER")
