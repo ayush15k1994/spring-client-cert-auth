@@ -36,17 +36,14 @@ public class X509ClientCertificateAuthenticationApplication {
 
 	@Bean
 	public UserDetailsService userDetailsService() {
-		return new UserDetailsService() {
-			@Override
-			public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-				if (username.contains("Bob") || username.contains("Alice")) {
-					return new User(
-							username, "",
-							AuthorityUtils.commaSeparatedStringToAuthorityList("ROLE_USER")
-					);
-				}
-				throw new UsernameNotFoundException("User not found!");
+		return username -> {
+			if (username.contains("Bob") || username.contains("Alice")) {
+				return new User(
+						username, "",
+						AuthorityUtils.commaSeparatedStringToAuthorityList("ROLE_USER")
+				);
 			}
+			throw new UsernameNotFoundException("User not found!");
 		};
 	}
 
