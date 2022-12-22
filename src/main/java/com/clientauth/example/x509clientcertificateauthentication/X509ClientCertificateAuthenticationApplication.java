@@ -13,6 +13,9 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.web.SecurityFilterChain;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @SpringBootApplication
 @EnableWebSecurity
 @EnableMethodSecurity()
@@ -36,8 +39,16 @@ public class X509ClientCertificateAuthenticationApplication {
 
 	@Bean
 	public UserDetailsService userDetailsService() {
+		List<String> users = new ArrayList<>();
+		users.add("Alice");
+		users.add("Bob");
+		users.add("Chad");
+		users.add("Dave");
+		users.add("Yves");
+
 		return username -> {
-			if (username.contains("Bob") || username.contains("Alice")) {
+			if (users.stream().anyMatch(s -> s.contains(username))
+			) {
 				return new User(
 						username, "",
 						AuthorityUtils.commaSeparatedStringToAuthorityList("ROLE_USER")
