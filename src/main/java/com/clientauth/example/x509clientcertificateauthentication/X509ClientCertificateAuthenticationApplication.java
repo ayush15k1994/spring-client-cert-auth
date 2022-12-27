@@ -2,7 +2,10 @@ package com.clientauth.example.x509clientcertificateauthentication;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
+import org.springframework.scheduling.annotation.EnableScheduling;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -19,6 +22,7 @@ import java.util.List;
 @SpringBootApplication
 @EnableWebSecurity
 @EnableMethodSecurity()
+@EnableScheduling
 public class X509ClientCertificateAuthenticationApplication {
 
 	public static void main(String[] args) {
@@ -57,6 +61,5 @@ public class X509ClientCertificateAuthenticationApplication {
 			throw new UsernameNotFoundException("User not found!");
 		};
 	}
-
 
 }
