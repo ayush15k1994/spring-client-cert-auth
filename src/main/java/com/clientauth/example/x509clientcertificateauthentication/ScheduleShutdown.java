@@ -17,7 +17,7 @@ public class ScheduleShutdown {
     @Autowired
     private ApplicationContext applicationContext;
 
-    @Scheduled(initialDelay = MILLISECONDS_IN_MINUTE, fixedRate = MILLISECONDS_IN_MINUTE)
+    @Scheduled(initialDelayString = "${schedule.shutdown.initial-delay-ms}", fixedRate = 2000)
     public void shutdownServer() {
         if (enabledScheduledShutdown.equals("true")) {
             System.exit(SpringApplication.exit(applicationContext));
