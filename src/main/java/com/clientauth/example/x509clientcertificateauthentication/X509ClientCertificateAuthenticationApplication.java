@@ -36,11 +36,15 @@ public class X509ClientCertificateAuthenticationApplication {
 				.authenticated()
 				.and()
 				.x509()
-				.subjectPrincipalRegex("CN=(.*?)(?:,|$)")
+				.subjectPrincipalRegex("CN=(.*?)(?:,|$)")		// the name for the user is picked here
 				.userDetailsService(userDetailsService());
 		return http.build();
 	}
 
+
+	/*
+	* This implementation only allows these five users to be authenticated
+	* */
 	@Bean
 	public UserDetailsService userDetailsService() {
 		List<String> users = new ArrayList<>();
